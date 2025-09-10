@@ -1,50 +1,18 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minhas Receitas</title>
-    <script src="https://cdn.tailwindcss.com"></script>  <!--Esta tag serve para importar o Tailwind CSS na sua página web de forma rápida e prática, direto via CDN (Content Delivery Network). -->
-    
-    <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style> 
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
-    {% load static %}
-</head>
-<body class="bg-gray-100 text-gray-900"> <!--Este comando HTML e CSS significa que a página terá um fundo cinza claro e texto cinza escuro.-->
-    <!-- Cabeçalho da Página -->
-    <header class="bg-gray-900 text-white p-6
-    
-    shadow-lg rounded-b-lg">
-        <div class="container mx-auto flex flex-col sm:flex-row items-center justify-center"> <!-- Alterado para 'justify-center' para centralizar o conteúdo -->
-            <!-- Agrupamento para o Ícone e Título (Centralizado) -->
-            <div class="flex items-center mb-4 sm:mb-0">
-                <div class="text-4xl mr-4">
-                    <i class="fas fa-utensils"></i> <!-- Ícone de utensílios (faca e garfo) -->
-                </div>
-                <!-- Título da Página -->
-                <h1 class="text-4xl font-bold text-center sm:text-left">
-                    Minhas Receitas Deliciosas
-                </h1>
-            </div>
-            <nav class="mt-4 sm:mt-0">
-                <!-- Conteúdo de navegação futuro aqui -->
-            </nav>
-        </div>
-    </header>
+{% extends "receitas/base.html" %}
+{% block title %}Minhas Receitas{% endblock %}
+
+{% block content %}
+
     <!-- seção de pesquisa -->
 <section class="container mx-auto mt-8 p-4 flex justify-center">
     <form action="{% url 'home' %}" method="GET" class="w-full max-w-lg flex bg-white rounded-full shadow-md overflow-hidden">
-        <input type="text" name="q" placeholder="Pesquisar receitas..." class="flex-grow p-4 text-gray-700 focus:outline-none">
-        <button type="submit" class="bg-orange-600 text-white px-6 py-2 rounded-full hover:bg-orange-700 transition duration-300">
+        <input type="text" name="q" placeholder="Pesquisar receitas..." class="flex-grow p-3 text-gray-700 focus:outline-none">
+        <button type="submit" class="bg-orange-500 text-white px-6 py-2 rounded-r-full hover:bg-orange-600 transition duration-300">
             <i class="fas fa-search"></i> Buscar
         </button>
     </form>
 </section>
-    <!-- Conteúdo Principal da Página -->
+    <!-- lista de receitas  -->
 <main class="container mx-auto p-6 bg-white rounded-lg shadow-md">
     <h2 class="text-2xl font-semibold mb-6 text-center">Nossas últimas receitas</h2>
     <div class="flex flex-wrap justify-center gap-6">
@@ -58,7 +26,7 @@
                 {% endif %}
                 
                 <h3 class="text-xl font-bold mb-2 text-gray-800">{{ receita.title }}</h3>
-                <p class="text-gray-600 mb-4">{{ receita.description }}</p>
+                <p class="text-gray-600 mb-4">{{ receita.description|truncatewords:20 }}</p>
                 
                 <a href="{% url 'receita_detail' receita.id %}" class="text-orange-600 hover:text-orange-800 font-semibold">Ver Receita &rarr;</a>
             </div>

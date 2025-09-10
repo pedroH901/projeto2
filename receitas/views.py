@@ -4,17 +4,21 @@ from .models import Receita
 
 def home(request):
     # Pega o parâmetro de busca da URL (ex: /?q=bolo)
-    query = request.GET.get('q')
+    categoria_slug = request.GET.get('categoria')
 
-    if query:
+    categoria_choices = [choice[0] for choice in Receita.CATEGORIAS]
+
+    if categoria_slug:
         # Se houver uma busca, filtra as receitas pelo título
-        receitas = Receita.objects.filter(title__icontains=query)
+        receitas = Receita.objects.filter(categoria=categoria_slug)
+        categoria_selecionada = categoria_slug
     else:
         # Se não, mostra todas as receitas
         receitas = Receita.objects.all()
+        categoria_selecionada = None
 
     # Envia o dicionário {'receitas': receitas} para o template
-    return render(request, 'receitas/home.html', {'receitas': receitas})
+    return render(request, 'receitas/home.html', {'receitas': receitas, 'categorias': categoria_choices, 'categoria_selecionada': categoria_selecionada})
 
 def receita_detail(request, id):
     # Busca a receita pelo ID ou retorna um erro 404
