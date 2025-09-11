@@ -1,0 +1,41 @@
+{% extends 'receitas/base.html' %}
+{% load static %}
+
+{% block title %}Pesquisar Receitas{% endblock %}
+
+{% block content %}
+<div class="text-center mb-8">
+    <h2 class="text-3xl font-bold">Encontre sua Receita Perfeita</h2>
+    <p class="text-gray-600">Digite o nome da receita que você está procurando.</p>
+</div>
+
+<section class="container mx-auto p-4 flex justify-center">
+    <form action="{% url 'pesquisar_receitas' %}" method="GET" class="w-full max-w-lg flex bg-white rounded-full shadow-md overflow-hidden">
+        <input type="text" name="q" placeholder="Ex: Bolo de chocolate..." class="flex-grow p-4 text-gray-700 focus:outline-none" value="{{ query|default_if_none:'' }}">
+        <button type="submit" class="bg-orange-600 text-white px-6 py-2 hover:bg-orange-700 transition duration-300">
+            <i class="fas fa-search"></i> Buscar
+        </button>
+    </form>
+</section>
+
+<section class="mt-8">
+    {% if query %} <h3 class="text-2xl font-semibold mb-6 text-center">Resultados para "{{ query }}"</h3>
+        
+        <div class="flex flex-wrap justify-center gap-6">
+            {% for receita in receitas %}
+            <div class="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
+                {% if receita.image %}
+                <img src="{{ receita.image.url }}" alt="{{ receita.title }}" class="w-full h-48 object-cover rounded-md mb-4">
+                {% endif %}
+                <h3 class="text-xl font-bold mb-2 text-gray-800">{{ receita.title }}</h3>
+                <p class="text-gray-600 mb-4">{{ receita.description }}</p>
+                <a href="{% url 'receita_detail' receita.id %}" class="text-orange-600 hover:text-orange-800 font-semibold">Ver Receita &rarr;</a>
+            </div>
+            {% empty %}
+            <p class="col-span-3 text-center text-gray-500">Nenhuma receita encontrada com este termo.</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</section>
+
+{% endblock %}
