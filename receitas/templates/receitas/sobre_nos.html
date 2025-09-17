@@ -1,0 +1,25 @@
+{%extends 'receitas/base.html'%}
+
+{%block content%}
+<div class="container mx-auto mt-8 p-4">
+    <div class="bg-whit dark:bg-gray-800 rounded-lg shadow-2xl overflow-hidden">
+
+        <div class="p-8 text-center bg-gray-100 dark:bg-gray-700">
+            <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-4">Sobre Nós</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Bem-vindo ao Minhas Receitas! Somos apaixonados por culinária e adoramos compartilhar receitas deliciosas e fáceis de preparar. Nossa missão é inspirar você a cozinhar pratos incríveis em casa, seja para o dia a dia ou para ocasiões especiais.</p>
+        </div>
+        <div class="p-8 lg:p=12 grid lg:grid-cols-2 gap-8 items-center">
+            <div class="text-gray-600 dark:text-gray-300 space-y-4">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Nossa História</h2>
+                <p>O Minhas Receitas foi fundado por um grupo de entusiastas da culinária que queriam criar um espaço onde as pessoas pudessem encontrar receitas variadas, desde pratos tradicionais até inovações culinárias. Acreditamos que cozinhar deve ser uma experiência prazerosa e acessível a todos.</p>
+            </div>
+        </div>
+        <div class="p-8 lg:p-12 text-center bg-gray-50 dark:bg-gray-700">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Nossa Equipe</h2>
+            <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Nossa equipe é composta por chefs experientes, nutricionistas e amantes da comida que trabalham juntos para trazer a você as melhores receitas. Estamos sempre explorando novas tendências culinárias e ingredientes para manter nosso conteúdo fresco e interessante.</p>
+            <a href="{% url 'home' %}" class="mt-6 inline-block bg-orange-500 text-white px-6 py-3 rounded-full hover:bg-orange-600 transition duration-300">Voltar para a Página Inicial</a>
+        </div>
+    </div>
+</div>
+
+{%endblock%}
